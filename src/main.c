@@ -11,9 +11,19 @@
 #include "../include/my.h"
 #include "../include/op.h"
 
-int corewar(char *arena)
+int corewar(char *arena, char **argv)
 {
-    return 0;
+    int position = 0;
+    int marge = 0;
+
+    for (int i = 0; i < MEM_SIZE; i++) {
+        live(arena, argv, my_itoa(position), i);
+        if (arena[i] == 0x01 && marge <= 0) {
+            position++;
+            marge = 200;
+        }
+        marge--;
+    }
 }
 
 int find_file(char **argv)
@@ -21,10 +31,11 @@ int find_file(char **argv)
     int compteur = 0;
 
     for (int i = 0; argv[i] != NULL; i++) {
-        if (argv[i][my_strlen(argv[i]) - 1] =='r')
+        if (argv[i][my_strlen(argv[i]) - 1] == 'r')
             compteur++;
     }
-    return compteur--;
+    compteur--;
+    return compteur;
 }
 
 char *fill_arena(char *arena, char **argv, int nb_file)
@@ -59,12 +70,12 @@ int main(int argc, char **argv)
     }
     if (nb_cycle != 0) {
         while (nb_cycle != 0) {
-            corewar(fill_arena(arena, argv, nb_file));
+            corewar(fill_arena(arena, argv, nb_file), argv);
             nb_cycle--;
         }
     } else {
         while (1)
-            corewar(arena);
+            corewar(arena, argv);
     }
     return 0;
 }

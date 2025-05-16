@@ -9,6 +9,8 @@ SRC	=	src/main.c	\
 		src/my_strcmp.c	\
 		src/my_strlen.c	\
 		src/my_atoi.c	\
+		src/my_itoa.c	\
+		src/instruction/live.c	\
 
 OBJ = $(SRC:.c=.o)
 
