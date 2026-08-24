@@ -1,26 +1,32 @@
 # Corewar
 
-Virtual machine, process scheduler, and bytecode assembler in C.
+Machine virtuelle, ordonnanceur de processus et assembleur bytecode en C.
 
-## Overview
+## Présentation
 
-Simulates a circular memory arena (6 KB) where multiple champion programs execute compiled assembly bytecode instructions concurrently.
+Corewar est un jeu de programmation bas niveau (B-CPE-200) dans lequel des programmes en assembleur s'affrontent au sein d'une arène mémoire circulaire partagée (6 Ko).
 
-## Getting Started
+Le projet comprend deux composants clés :
+- **Assembleur (`asm`)** : Traduit le code source assembleur (`.s`) en bytecode binaire exécutable (`.cor`).
+- **Machine Virtuelle (`corewar`)** : Charge les champions en mémoire, ordonnance l'exécution de leurs processus instruction par instruction et décompte les cycles jusqu'au dernier survivant.
 
-### Prerequisites
-- GCC / Clang
+## Prérequis
+
+- Compilateur C (GCC ou Clang)
 - Make
 
-### Build & Run
+## Compilation et Utilisation
 
 ```bash
-# Build the virtual machine and assembler
+# Compiler l'assembleur et la machine virtuelle
 make
 
-# Compile an assembly champion
-./asm/asm champion.s
+# Compiler un champion assembleur
+./asm/asm champions/fluttershy.s
 
-# Run the arena battle
-./corewar/corewar champion1.cor champion2.cor
+# Lancer le combat dans l'arène (supporte de 2 à 4 champions)
+./corewar/corewar champions/fluttershy.cor champions/abel.cor
+
+# Option de dump mémoire à un cycle précis
+./corewar/corewar -dump 1500 champions/fluttershy.cor champions/abel.cor
 ```
